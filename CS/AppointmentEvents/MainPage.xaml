@@ -1,0 +1,64 @@
+﻿<Page
+    x:Class="AppointmentEvents.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AppointmentEvents"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:dxsch="using:DevExpress.UI.Xaml.Scheduler"
+    xmlns:dxmvvmi="using:DevExpress.Mvvm.UI.Interactivity"
+    xmlns:dxmvvm="using:DevExpress.Mvvm.UI"
+    
+    xmlns:dxlc="using:DevExpress.UI.Xaml.Layout"
+    xmlns:dx="using:DevExpress.UI.Xaml.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Confirm On:" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+            <StackPanel Orientation="Vertical" Grid.Row="1">
+                <CheckBox IsChecked="True" x:Name="chkAdding" Content="AppointmentAdding"/>
+                <CheckBox IsChecked="True" x:Name="chkUpdating" Content="AppointmentUpdating"/>
+                <CheckBox IsChecked="True" x:Name="chkRemoving" Content="AppointmentRemoving"/>
+                <CheckBox IsChecked="True" x:Name="chkEditDialogShowing" Content="EditAppointmentDialogShowing"/>
+                <CheckBox IsChecked="True" x:Name="chkRemoveDialogShowing" Content="RemoveAppointmentDialogShowing"/>
+            </StackPanel>
+            <TextBlock Text="Log:" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+            <ListBox ItemsSource="{Binding LogItems}" Grid.Row="3"/>
+        </Grid>
+       
+    
+        <dxsch:SchedulerControl Grid.Column="1" MaxHeight="1000"  MaxWidth="1500"
+                                AppointmentAdding="SchedulerControl_AppointmentAdding"
+                                AppointmentAdded="SchedulerControl_AppointmentAdded"
+                                AppointmentUpdating="SchedulerControl_AppointmentUpdating"
+                                AppointmentUpdated="SchedulerControl_AppointmentUpdated"
+                                AppointmentRemoving="SchedulerControl_AppointmentRemoving"
+                                AppointmentRemoved="SchedulerControl_AppointmentRemoved"
+                                RemoveAppointmentDialogShowing="SchedulerControl_RemoveAppointmentDialogShowing"
+                                EditAppointmentDialogShowing="SchedulerControl_EditAppointmentDialogShowing"
+                                >
+                <dxsch:Calendar AppointmentsSource="{Binding Items}">
+                    <dxsch:Calendar.AppointmentMappings>
+                        <dxsch:AppointmentMappings Subject="Subject" Start="Start" End="End" RecurrenceRule="RecurrenceRule" Type="Type" PatternId="PatternId"/>
+                    </dxsch:Calendar.AppointmentMappings>
+                </dxsch:Calendar>
+            </dxsch:SchedulerControl>
+        
+    </Grid>
+        
+</Page>
